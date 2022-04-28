@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Button from "./components/Button";
+import { useState } from "react";
+import Text from "./components/Text";
 
 function App() {
+  const [text, zText] = useState("Mindx 18+");
+
+  const handleState = () => {
+    for (let i = 0; i <= 6; i++) {
+      zText(i);
+    }
+  };
+
+  console.log(text);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button
+        text="Change to Mindx Teens"
+        color="green"
+        onClick={handleState}
+      />
+      <Text text={text} />
+    </>
   );
 }
 
 export default App;
+
+//state làm cho component re-render
