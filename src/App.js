@@ -1,32 +1,33 @@
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import Button from "./components/Button";
-import { useState } from "react";
-import Text from "./components/Text";
 
-function App() {
-  const [text, zText] = useState("Mindx 18+");
-
-  const handleState = () => {
-    for (let i = 0; i <= 6; i++) {
-      zText(i);
-    }
+const App = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [text, setText] = useState("");
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
   };
-
-  console.log(text);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setText(inputValue);
+    setInputValue("");
+  };
   return (
     <>
-      <Button
-        text="Change to Mindx Teens"
-        color="green"
-        onClick={handleState}
-      />
-      <Text text={text} />
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={inputValue} onChange={handleChange} />
+        <button type="submit">Submit</button>
+      </form>
+      <h1>{text}</h1>
     </>
   );
-}
+};
 
 export default App;
 
-//state làm cho component re-render
+// () === return
+// {}  ->> {
+//   return (
+//     ....
+//   )
+// }
