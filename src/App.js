@@ -1,33 +1,36 @@
 import React, { useState } from "react";
-import "./App.css";
+import Ex1 from "./homework/Ex1";
+import Ex2 from "./homework/Ex2";
 
 const App = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [text, setText] = useState("");
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  const [value, setValue] = useState(false);
+  const [name, setName] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setText(inputValue);
-    setInputValue("");
+    console.log(name);
+    console.log(value);
   };
+
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={inputValue} onChange={handleChange} />
-        <button type="submit">Submit</button>
-      </form>
-      <h1>{text}</h1>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <div>
+        <input
+          type="checkbox"
+          checked={value}
+          onChange={() => setValue(!value)}
+        />
+        <span>Female</span>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
 export default App;
-
-// () === return
-// {}  ->> {
-//   return (
-//     ....
-//   )
-// }
