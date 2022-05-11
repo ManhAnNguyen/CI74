@@ -1,62 +1,97 @@
-import { useState, useEffect } from "react";
-import Text from "./component/Text";
+import React, { useState } from "react";
+import "./App.css";
+import Button from "./components/Button";
+import Input from "./components/Input";
+import { ImHome } from "react-icons/im";
+import { MdHomeMini } from "react-icons/md";
+
+const inititalValue = {
+  name: "",
+  amount: "",
+  date: "",
+};
 
 const App = () => {
-  const [count, setCount] = useState(1);
-  const [person, setPerson] = useState({});
-  const [hidden, setHidden] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [newItem, setNewItem] = useState(inititalValue);
+  const { name, amount, date } = newItem;
 
-  const [product, setProduct] = useState(null); //inital product : null ; success : dataRes
+  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const fetchData = async () => {
-    // const data = await fetch("https://fakestoreapi.com/products");
-
-    try {
-      const data = await fetch("https://fakestoreapi.com/products");
-      const dataRes = await data.json();
-      setProduct(dataRes);
-    } catch (err) {
-      console.log("err", err.message);
+    if (!name || !amount || !date) {
+      alert("Please full fill !!");
+      return;
     }
+
+    setData([...data, newItem]);
+
+    setNewItem(inititalValue);
+    setShowForm(false);
   };
 
-  console.log(product);
-
-  // useEffect(() => {
-  //   console.log("Render");
-  //   setCount(count);
-  //   //setCount(count + 1)
-  // }, [count]);
-
-  // prevCount !== currentCount ->> useEFFECT
-  // prevCount === currentCount ->> k chay useEFFECT
-
-  // [] : array dependencies
-
-  // useEffect(() => {
-  //   console.log("render");
-  // }, [person]);
+  console.log(data);
   return (
-    <div>
-      {/* <p>Count : {count}</p>
-      <button onClick={() => setCount(count + 1)}>INCREASE</button>
-      <button onClick={() => setPerson({})}>Set Person</button> */}
-      <button onClick={() => setHidden(!hidden)}>
-        {hidden ? "Show" : "Hidden"}
-      </button>
-      {hidden ? null : <Text />}
-    </div>
+    <>
+      <span className="icon">
+        <ImHome fontSize="40px" color="white" />
+      </span>
+      <main id="section">
+        <div className="add-form">
+          {showForm ? (
+            <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                <Input
+                  placeholder="Enter name here"
+                  label="Name"
+                  valueInput={name}
+                  onChangeInput={(e) =>
+                    setNewItem({ ...newItem, name: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Enter amount here"
+                  label="Amount"
+                  typeInput="number"
+                  valueInput={amount}
+                  onChangeInput={(e) =>
+                    setNewItem({ ...newItem, amount: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Date"
+                  typeInput="date"
+                  label="Date"
+                  valueInput={date}
+                  onChangeInput={(e) =>
+                    setNewItem({ ...newItem, date: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="button-group">
+                <Button colorButton="violet" text="ADD" />
+                <Button
+                  colorButton="gray"
+                  text="CANCEL"
+                  onClickButton={() => setShowForm(false)}
+                />
+              </div>
+            </form>
+          ) : (
+            <Button
+              onClickButton={() => setShowForm(true)}
+              colorButton={"violet"}
+              text="ADD NEW EXPENSE"
+            />
+          )}
+        </div>
+        <div className="list-expense"></div>
+      </main>
+    </>
   );
 };
 
 export default App;
-
-// mạnh an ->> có deadline , có trận seagame VN and Ukraine;
-
-//pa1 : seagame : 12h -> 4:00 AM ---> deadline --> 2hours  ---> total : 6hours;
-//pa2 : seagame : 4 hours and deadline : 2 hours  --> 4 hours
-//ba cách xử lý bất đồng bộ : callback,promises,es6 : async await
