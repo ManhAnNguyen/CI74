@@ -13,13 +13,31 @@ code {
 }
 
 
-.todo{
-  margin: 10px;
+.button{
+  margin: 0 auto;
+  display: block;
   padding: 10px;
-  border: 1px solid #b5b4b4;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  background: gold;
+  border: none;
+  margin-top: 80px;
+  max-width: 200px;
+  min-width: 200px;
 }
 
-.todo span{
-  display: inline;
-  margin: 0 5px;
+.upto-top{
+  position: fixed;
+  cursor: pointer;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: mymove 3s infinite;
+}
+
+@keyframes mymove {
+  0%   {transform: translateY(0)}
+  50%   {transform: translateY(-20px)}
+  100%  {transform: translateY(0)}
 }
