@@ -1,45 +1,68 @@
-import React, { createContext, useReducer } from "react";
-import HomeWork from "./homework";
-import { useEffect, useState } from "react";
-import TodoList from "./components/TodoList";
+import React, { createContext } from "react";
+import Button from "./component/Button";
+import Title from "./component/Title";
+const data = [1, 2, 3, 4, 5];
 
-const initialValue = {
-  color: "green",
-};
-
-export const TodoContext = createContext();
-
-const countReducer = (state, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
-    case "CHANGE":
-      return action.payload;
-    default:
-      return state;
-  }
-};
+export const TitleContext = createContext(); //tạo ra context
 
 const App = () => {
-  const [count, dispatch] = useReducer(countReducer, 1);
-
-  console.log("count :", count);
-
-  const increment = () => dispatch({ type: "INCREMENT" });
-  const decrement = () => dispatch({ type: "DECREMENT" });
-  const change = () => dispatch({ type: "CHANGE", payload: 1000 });
-
   return (
-    <TodoContext.Provider value={initialValue}>
-      <TodoList />
-      <button onClick={increment}>Increase</button>
-      <button onClick={decrement}>Decrease</button>
-      <button onClick={change}>Change to 1000</button>
-      <h1>Count : {count}</h1>
-    </TodoContext.Provider>
+    <>
+      <TitleContext.Provider value={data}>
+        <Title />
+        <Button />
+      </TitleContext.Provider>
+    </>
   );
 };
 
 export default App;
+
+// import React, { useState, useEffect } from "react";
+// import ReactLoading from "react-loading";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import { ImHome } from "react-icons/im";
+// import { MdHomeMax } from "react-icons/md";
+
+// const App = () => {
+//   const [todos, setTodos] = useState(null);
+//   const [isLoading, setLoading] = useState(false);
+
+//   const handleFetch = async () => {
+//     setLoading(true);
+//     setTimeout(async () => {
+//       const res = await fetch("https://jsonplaceholder.typicode.com/todoss");
+
+//       if (res.ok) {
+//         const data = await res.json();
+//         setTodos(data);
+//         toast.success("Call api successfully!!!");
+//       } else {
+//         console.log("error");
+//         toast.error("Call api failed!!!");
+//       }
+
+//       setLoading(false);
+//     }, 3000);
+//   };
+
+//   // console.log(todos);
+//   return (
+//     <div>
+//       <ImHome color="red" fontSize={"32px"} />
+//       <button className="button" onClick={handleFetch}>
+//         {isLoading ? (
+//           <ReactLoading type="spin" color="white" height="20px" width="20px" />
+//         ) : (
+//           " FETCH TODOS"
+//         )}
+//       </button>
+
+//       {todos && todos.map((t, index) => <h1 key={index}>{t.title}</h1>)}
+//       <ToastContainer />
+//     </div>
+//   );
+// };
+
+// export default App;
