@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isLogin, setIsLogin }) => {
   return (
     <>
-      <Header />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       {children}
 
       <Footer />
