@@ -1,66 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import "./styles.css";
+import React from "react";
+import { SHeader } from "./styles";
+import { BsFillCartFill } from "react-icons/bs";
 
-const Header = () => {
-  const handleActive = ({ isActive }) => {
-    return isActive && "active";
-  };
-
-  const [currentUser, setCurrentUser] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    let current = localStorage.getItem("currentUser")
-      ? JSON.parse(localStorage.getItem("currentUser"))
-      : null;
-    if (current) {
-      setCurrentUser(current);
-    } else {
-      setCurrentUser(null);
-    }
-  }, [location]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    navigate("../log-in", { replace: true });
-  };
-
-  console.log(currentUser);
-
+const Header = ({ amount, setShowModal }) => {
   return (
-    <header>
-      <NavLink to="/" className={`logo ${handleActive}`}>
-        Mindx
-      </NavLink>
-      <div className="options">
-        <ul>
-          <li>
-            <NavLink to="/user" className={handleActive}>
-              User
-            </NavLink>
-            {currentUser ? (
-              <div className="user-info">
-                <span className="greet">Hello ,{currentUser.userName}</span>
-                <button className="logout" onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <>
-                <NavLink to="/log-in" className={handleActive}>
-                  Log In
-                </NavLink>
-                <NavLink to="/sign-up" className={handleActive}>
-                  Sign up
-                </NavLink>
-              </>
-            )}
-          </li>
-        </ul>
+    <SHeader>
+      <h1>Meal</h1>
+      <div className="cart" onClick={() => setShowModal(true)}>
+        <BsFillCartFill fontSize="25px" />
+        <span className="amount">{amount}</span>
       </div>
-    </header>
+    </SHeader>
   );
 };
 
