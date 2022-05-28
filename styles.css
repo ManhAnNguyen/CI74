@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 20px;
+    background-color: brown;
+    color: white;
+}
+
+header .menu{
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+}
+header .options ul {
+    display: flex;
+    align-items: center;
+}
+
+header .options ul li{
+    list-style: none;
+    margin-left: 30px;
+    font-size: 20px;
+}
+header .options ul li a{
+   text-decoration: none;
+   color: white;
+}
+
+header .options .close{
+    display: none;
+}
+
+
+@media only screen and (max-width : 1000px){
+    header .menu{
+        display: block;
+    }
+    header .options {
+        position: fixed;
+        width: 250px;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        background-color: brown;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all .2s linear;
+       
+    }
+    header .options .close{
+        font-size: 21px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        display: block;
+    }
+    header .options ul{
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+
+    header .options ul li{
+        list-style: none;
+        margin-left: 30px;
+        margin-top: 20px;
+       
+    }
+
+    header .options.active-navbar{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* .exam{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transform: translateX(100%);
+} */
+
+
+.content{
+    display: flex;
+}
+/* .item{
+    flex: 1;
+} */
+
+.content .list-product{
+    flex: 1;
+    /* background-color: red; */
+}
+.content .list-cart{
+  /* background-color: yellow; */
+  flex: 1;
+}
