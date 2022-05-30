@@ -12,3 +12,14 @@
     width: fit-content;
     margin-top: 70px;
 }
+
+.children{
+    min-height: 90vh;
+}
+
+.loading{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

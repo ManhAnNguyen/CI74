@@ -8,7 +8,7 @@ export const Footer = () => {
 const SFooter = styled.footer`
   background-color: #13c1c1;
   color: white;
-  position: fixed;
+
   bottom: 0;
   width: 100%;
   display: flex;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { BsCartFill } from "react-icons/bs";
 
 const Header = () => {
   let activeStyle = {
@@ -44,6 +45,7 @@ const Header = () => {
                 </NavLink>
               </li>
             )}
+
             <li>
               <NavLink
                 to="/user"
@@ -85,7 +87,7 @@ export default Header;
 
 const SHeader = styled.div`
   background-color: #146ab5;
-  padding: 10px 20px;
+  padding: 20px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
