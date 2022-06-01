@@ -26,6 +26,22 @@ export const SHome = styled.div`
     font-size: 26px;
     color: violet;
   }
+  .filter {
+    display: flex;
+    align-items: center;
+    .input {
+      padding: 10px 20px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      input {
+        border: none;
+        outline: none;
+        margin-left: 5px;
+      }
+    }
+  }
   .list-products {
     display: grid;
     padding-top: 20px;

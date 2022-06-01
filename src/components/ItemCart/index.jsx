@@ -2,7 +2,7 @@ import React from "react";
 import { SItemCart } from "./styles";
 import { MdDelete } from "react-icons/md";
 
-const CartItem = ({ cart, handleIncreaseCount, handleDecrease }) => {
+const CartItem = ({ cart, handleChange, handleDelete }) => {
   const { title, image, price } = cart;
   return (
     <SItemCart>
@@ -15,15 +15,21 @@ const CartItem = ({ cart, handleIncreaseCount, handleDecrease }) => {
       </div>
       <div className="right-cart">
         <div className="count">
-          <button className="decrease" onClick={() => handleDecrease(cart.id)}>
+          <button
+            className="decrease"
+            onClick={() => handleChange(cart.id, "decrease")}
+          >
             -
           </button>
           <span>{cart.count}</span>
-          <button className="plus" onClick={() => handleIncreaseCount(cart.id)}>
+          <button
+            className="plus"
+            onClick={() => handleChange(cart.id, "increase")}
+          >
             +
           </button>
         </div>
-        <span className="delete">
+        <span className="delete" onClick={() => handleDelete(cart.id)}>
           <MdDelete color="red" fontSize="25px" />
         </span>
       </div>

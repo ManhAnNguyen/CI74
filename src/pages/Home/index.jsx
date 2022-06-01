@@ -6,11 +6,20 @@ import { SHome } from "./styles";
 import ReactLoading from "react-loading";
 import { BsCartFill } from "react-icons/bs";
 import { toast } from "react-toastify";
+import { FcSearch } from "react-icons/fc";
+import {
+  handleFilterCategoryHelper,
+  handleFilterPriceHelper,
+} from "../../util";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [searchProducts, setSearchProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [carts, setCarts] = useState([]);
+  const [text, setText] = useState("");
+  const [priceFilter, setPriceFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState("All");
 
   useEffect(() => {
     handleFetch();
@@ -26,6 +35,7 @@ const Home = () => {
     setIsLoading(true);
     const res = await fetch("https://fakestoreapi.com/products");
     const data = await res.json();
+    setSearchProduct(data);
     setProducts(data);
     setIsLoading(false);
   };
@@ -50,7 +60,37 @@ const Home = () => {
     setCarts(addCarts);
   };
 
-  console.log(carts);
+  const handleSearch = (e) => {
+    const value = e.target.value;
+
+    setText(value);
+
+    setProducts(
+      searchProducts.filter((p) =>
+        p.title.toUpperCase().includes(value.toUpperCase())
+      )
+    );
+  };
+
+  const handleFilterCategory = (e) => {
+    const value = e.target.value;
+    let resultFilter;
+    setCategoryFilter(value);
+    resultFilter = handleFilterCategoryHelper(value, searchProducts);
+    console.log(resultFilter);
+    resultFilter = handleFilterPriceHelper(priceFilter, resultFilter);
+
+    setProducts(resultFilter);
+  };
+
+  const handleFilterPrice = (e) => {
+    const value = e.target.value;
+    setPriceFilter(value);
+    let filterResults;
+    filterResults = handleFilterPriceHelper(value, searchProducts);
+
+    setProducts(filterResults);
+  };
 
   if (isLoading)
     return (
@@ -66,6 +106,34 @@ const Home = () => {
         <span className="total-cart">{carts.length}</span>
       </Link>
       <h4 className="total">{products.length} Products</h4>
+      <div className="filter">
+        <div className="input">
+          <FcSearch />
+          <input
+            type="text"
+            placeholder="Search"
+            value={text}
+            onChange={handleSearch}
+          />
+        </div>
+        <div className="select">
+          <select onChange={handleFilterCategory} value={categoryFilter}>
+            <option value="all">All</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="jewelery">Jewelery</option>
+            <option value="electronics">Electronics</option>
+          </select>
+        </div>
+        <div className="select">
+          <select onChange={handleFilterPrice} value={priceFilter}>
+            <option value="all">All</option>
+            <option value="0-10">0-10</option>
+            <option value="10-60">10-60</option>
+            <option value=">60">{`>60`}</option>
+          </select>
+        </div>
+      </div>
       <div className="list-products">
         {products.map((p, index) => (
           <Product key={index} product={p} handleAddToCart={handleAddToCart} />

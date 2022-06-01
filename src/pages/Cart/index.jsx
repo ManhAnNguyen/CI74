@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../../components/ItemCart";
+import { handleCaculateFee } from "../../util";
 import { SCart } from "./styles";
 
 const Cart = () => {
@@ -13,19 +14,25 @@ const Cart = () => {
     setCarts(cartsLocal);
   }, []);
 
-  const handleIncreaseCount = (id) => {
-    let addCart = carts.map((c) =>
-      c.id === id ? { ...c, count: c.count + 1 } : c
-    );
+  const handleChange = (id, method) => {
+    let addCart;
+    if (method === "increase") {
+      addCart = carts.map((c) =>
+        c.id === id ? { ...c, count: c.count + 1 } : c
+      );
+    } else {
+      addCart = carts.map((c) =>
+        c.id === id ? { ...c, count: c.count === 1 ? 1 : c.count - 1 } : c
+      );
+    }
 
     setCarts(addCart);
     localStorage.setItem("carts", JSON.stringify(addCart));
   };
-  const handleDecrease = (id) => {
-    let addCart = carts.map((c) =>
-      c.id === id ? { ...c, count: c.count - 1 } : c
-    );
 
+  const handleDelete = (id) => {
+    let addCart;
+    addCart = carts.filter((c) => id !== c.id);
     setCarts(addCart);
     localStorage.setItem("carts", JSON.stringify(addCart));
   };
@@ -37,12 +44,15 @@ const Cart = () => {
         {carts.map((cart, index) => (
           <CartItem
             key={index}
+            handleDelete={handleDelete}
             cart={cart}
-            handleIncreaseCount={handleIncreaseCount}
-            handleDecrease={handleDecrease}
+            handleChange={handleChange}
           />
         ))}
       </div>
+      {carts.length > 0 && (
+        <h1 className="total">Total fee : $ {handleCaculateFee(carts)}</h1>
+      )}
     </SCart>
   );
 };
