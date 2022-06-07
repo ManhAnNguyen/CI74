@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+js.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. suwj khac biet giua var,let,const
 
-## Available Scripts
+- re-declare
+- hoisting
+- change value
 
-In the project directory, you can run:
+2. co nhung cach nao de xu ly bat dong bo trong js
 
-### `npm start`
+- bat dong bo la gi : set time out,call api,..
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+co 3 cach de xu li bat dong bo
+2.1. callback
+2.2. Promise
+2.3. async await
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. HTML co fai ngon ngu lap trinh k? ko
+4. == va === (ko ep buoc va ep buoc)
+5. tham tri(nguyen thuy) va tham chieu(object)
+6. 6 kieu du lieu co ban : number,string,boolean,null,undefined va object<object array function>
+7. anonymous function (la function nhung ko co ten )
 
-### `npm test`
+.css
+1,css co fai ngon ngu lap trinh k (ko phai)
+2,do uu tien trong css (inline style > id > class > tag )
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+react
 
-### `npm run build`
+1,su khac biet giua class component va functional component
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- class co ham render con functional thi khong
+- class co life cycle con functional thi khong(no sinh ra useEffect de thay the)
+- class co ham constructor con functional thi khong
+- class dung key word class es6 js de viet ra,conf functional thi dung tu khoa function or arrow function
+- quan ly state : class dung this.state de quan ly state,con functional se dung hook cu the la useState
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2.react la gi
+-react la thu vien cua js,phat trien boi facebook,dung de xay dung UI(compoents)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3.life cycle la gi
 
-### `npm run eject`
+co 3 trang thai : mounting,update,unmounting
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+mouting --> component sinh ra vao cay dom (componentdidmount)
+update --> component dc update(thay doi state,..) (componentdidupdate)
+unmounting --> component dc remove khoi cay dom (componentwillunmount)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+useEffect(() => {
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    //code here
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+return () => {
+////
+}
+},[])
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4.prop va state
+state lm component re-render lai,con prop thi khong,
+state dung cho 1 component(scope trong component do)
+con props co the truyen cho nhung thang khac dung
